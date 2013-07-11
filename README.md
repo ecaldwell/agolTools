@@ -5,7 +5,6 @@ A Python package to assist with administering ArcGIS Online Organizations.
 ## Features
 * Create a spreadsheet of all users in the org
 * Update map service urls in webmaps
-* Check for new users and add them to a list of groups
 
 ## Instructions
 
@@ -45,7 +44,6 @@ Then do one of the following:
         # Write user data.
         for user in users:
             dataWriter.writerow([user['fullName'], user['username'], user['role']])
-
 
 #### Add new users to existing groups
 	# Requires admin role.
