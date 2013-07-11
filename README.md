@@ -49,7 +49,7 @@ Then do one of the following:
 
 #### Add new users to existing groups
 	# Requires admin role.
-	import csv
+	import csv, datetime
 	from agoTools.admin import Admin
 	agoAdmin = Admin(<username>) # Replace <username> with your admin username.
     
