@@ -6,6 +6,7 @@ A Python package to assist with administering ArcGIS Online Organizations.
 * Create a spreadsheet of all users in the org
 * Update map service urls in webmaps
 * Search for new users and add them to a list of groups
+* Move (migrate) all items between accounts (single or batch)
 
 ## Instructions
 
@@ -29,43 +30,64 @@ Then do one of the following:
 #### Admin Class
  
 #### Create a spreadsheet of all users in the org
-	# Requires admin role.
-	import csv
-	from agoTools.admin import Admin
+    # Requires admin role.
+    import csv, time
+    from agoTools.admin import Admin
 	
-	agoAdmin = Admin(<username>) # Replace <username> with your admin username.
-	users = agoAdmin.getUsers()
+    agoAdmin = Admin(<username>) # Replace <username> with your admin username.
+    users = agoAdmin.getUsers()
 
-	outputFile = 'c:/temp/users.csv'
+    outputFile = 'c:/temp/users.csv'
 
-	with open(outputFile, 'wb') as output:
-	    dataWriter = csv.writer(output, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
-	    # Write header row.
-	    dataWriter.writerow(['Full Name', 'Username', 'Role'])
-	    # Write user data.
-	    for user in users:
-	        dataWriter.writerow([user['fullName'], user['username'], user['role']])
+    with open(outputFile, 'wb') as output:
+        dataWriter = csv.writer(output, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+        # Write header row.
+        dataWriter.writerow(['Full Name', 'Email', 'Username', 'Role', 'Date Created'])
+        # Write user data.
+        for user in users:
+            dataWriter.writerow([user['fullName'], user['email'], user['username'], user['role'], time.strftime("%Y-%m-%d",time.gmtime(user['created']/1000))])
 
 #### Add new users to existing groups
-	# Requires admin role.
-	import csv, datetime
-	from agoTools.admin import Admin
-	agoAdmin = Admin(<username>) # Replace <username> with your admin username.
-    
-	daysToCheck = 2
-	groups = ['d93aabd856f8459a8905a5bd434d4d4a', 'f84c841a3dfc4591b1ff83281ea5025f']
-	userSummary = agoAdmin.addNewUsersToGroups(daysToCheck, groups)
+    # Requires admin role.
+    import csv, datetime
+    from agoTools.admin import Admin
 
-	outputDir = 'c:/temp/'
-	outputDate = datetime.datetime.now().strftime("%Y%m%d") # No modification needed, current date prefixed to filename.
-	outputFile = outputDir + outputDate + '_AddNewUsers2Groups.csv'
-	with open(outputFile, 'wb') as output:
+    # User parameters:
+    agoAdmin = Admin(<username>)   # Replace <username> with your admin username.
+    daysToCheck = 7   # Replace with number of days to check...1 checks past day, 7 checks past week, etc.
+    groups = [<groupID1>, <groupID2>, ...]   # Enter <groupIDs> of groups to which you want to add new users
+    outputDir = 'c:/temp/'   # Replace with path for report file
+	
+    outputDate = datetime.datetime.now().strftime("%Y%m%d")   # Current date prefixed to filename.
+    outputFile = outputDir + outputDate + '_AddNewUsers2Groups.csv'
+	
+    userSummary = agoAdmin.addNewUsersToGroups(daysToCheck, groups)
+	
+    with open(outputFile, 'wb') as output:
         dataWriter = csv.writer(output, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
         # Write header row.
         dataWriter.writerow(['Full Name', 'Email', 'Username', 'Role', 'Date Created'])
         # Write user data.
         for user in userSummary:
             dataWriter.writerow([user['fullName'], user['email'], user['username'], user['role'], time.strftime("%Y-%m-%d", time.gmtime(user['created']/1000))])
+
+#### Move all content from one account to another
+    #Requires admin role
+	
+    from agoTools.admin import Admin
+    agoAdmin = Admin(<username>)  #Replace <username> with your admin username
+    
+    migrateAccount(agoAdmin, <userFrom>, <userTo>)  #Replace with your current and new account usernames
+	
+#### Move all content between pairs of accounts listed in a CSV
+
+    #Requires admin role
+	#Recommend creating CSV in Excel and saving as "CSV (Comma Delimited)"
+	
+    from agoTools.admin import Admin
+
+    agoAdmin = Admin(<username>)  #Replace <username> with your admin username
+    Admin.migrateAccounts(agoAdmin, r'<userMapping.CSV path>')   # Replace <userMapping.CSV path> with path to your file
 
             
 #### Utilities Class
@@ -89,7 +111,16 @@ Then do one of the following:
     newUrl = 'http://newserver.com/app'
 
     agoUtilities.updateItemUrl(itemId, oldUrl, newUrl)
-        
+
+#### Move all items from one user to another (within the same Org)
+#### Useful when migrating to Enterprise Logins
+
+    from agoTools.admin_working import Admin
+	
+    myAgol = Admin('<username>')  # Replace <username> your ADMIN account
+    Admin.migrateAccount(myAgol, '<userFrom>', '<userTo>')   # Replace with usernames between which you are moving items
+	
+
 ## Requirements
 
 * Python
