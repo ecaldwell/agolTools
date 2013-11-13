@@ -28,22 +28,17 @@ Then do one of the following:
         sys.path.append('c:/myscripts')
 
 ## Samples
-
 ### Admin Class
 
-#### [Create a spreadsheet of all users in the org](examples/createUserListCSV.py)
-
-#### Add new users to existing groups
-
-#### Move all items from one account to another, reassign ownership of all groups, add user to another user's groups, or do all three at the same time (i.e., migrate user to a new account within the same Org)
+* [Create a spreadsheet of all users in the org](examples/createUserListCSV.py)
+* [Add new users to existing groups](examples/addNewUsersToGroups.py)
+* [Move all items from one account to another, reassign ownership of all groups, add user to another user's groups, or do all three at the same time (i.e., migrate user to a new account within the same Org)](examples/moveItemsReassignGroups.py)
   
 ### Utilities Classs
             
-#### Update map service urls in webmaps
-    
-#### Update the URL for registered map services or web applications
-
-#### Search for the top 10 most viewed public items in my organization or search for all content owned by a specific user (admin view)
+* [Update map service urls in webmaps](examples/updateMapServiceUrlsInWebMaps.py)
+* [Update the URL for registered map services or web applications](examples/updateRegisteredUrlForServiceOrApp.py)
+* [Search for the top 10 most viewed public items in my organization or search for all content owned by a specific user (admin view)](examples/searchExamples.py)
 
 
 ## Requirements
