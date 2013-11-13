@@ -37,7 +37,7 @@ A Python package to assist with administering ArcGIS Online Organizations.
   * [Move all items from one account to another, reassign ownership of all groups, and/or add user to another user's groups](samples/moveItemsReassignGroups.py)
   * [Migrate account(s)](samples/migrateAccount.py)
   
-### Utilities Classs
+### Utilities Class
 
 * [Update map service urls in webmaps](samples/updateMapServiceUrlsInWebMaps.py)
 * [Update the URL for registered map services or web applications](samples/updateRegisteredUrlForServiceOrApp.py)
