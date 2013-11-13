@@ -31,7 +31,7 @@ Then do one of the following:
 
 ### Admin Class
 
-#### [Create a spreadsheet of all users in the org](http://github.com/Esri/ago-tools)
+#### [Create a spreadsheet of all users in the org](examples/createUserListCSV.py)
 
 #### Add new users to existing groups
 
