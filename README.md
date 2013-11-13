@@ -3,6 +3,7 @@
 A Python package to assist with administering ArcGIS Online Organizations.
 
 ## Features
+
 * Create a spreadsheet of all users in the org
 * Update map service urls in webmaps
 * Search for new users and add them to a list of groups
@@ -15,10 +16,10 @@ A Python package to assist with administering ArcGIS Online Organizations.
 2. Run and try the samples.
 
 ## Installation
-1. Unzip into a folder such as C:/myscripts
-2 **Remove dashes from the directory name** (e.g. `C:/myscripts/ago-tools-master` to `C:/myscripts/agoTools`)
 
-Then do one of the following:
+1. Unzip into a folder such as C:/myscripts
+2. **Remove dashes from the directory name** (e.g. `C:/myscripts/ago-tools-master` to `C:/myscripts/agoTools`)
+3. Then do one of the following:
 
 * add that directory to your system path in advanced system settings
 --OR--
@@ -30,15 +31,15 @@ Then do one of the following:
 ## Samples
 ### Admin Class
 
-* [Create a spreadsheet of all users in the org](examples/createUserListCSV.py)
-* [Add new users to existing groups](examples/addNewUsersToGroups.py)
-* [Move all items from one account to another, reassign ownership of all groups, add user to another user's groups, or do all three at the same time (i.e., migrate user to a new account within the same Org)](examples/moveItemsReassignGroups.py)
+* [Create a spreadsheet of all users in the org](samples/createUserListCSV.py)
+* [Add new users to existing groups](samples/addNewUsersToGroups.py)
+* [Move all items from one account to another, reassign ownership of all groups, add user to another user's groups, or do all three at the same time (i.e., migrate user's items and groups to a new account within the same Org)](samples/moveItemsReassignGroups.py)
   
 ### Utilities Classs
-            
-* [Update map service urls in webmaps](examples/updateMapServiceUrlsInWebMaps.py)
-* [Update the URL for registered map services or web applications](examples/updateRegisteredUrlForServiceOrApp.py)
-* [Search for the top 10 most viewed public items in my organization or search for all content owned by a specific user (admin view)](examples/searchExamples.py)
+
+* [Update map service urls in webmaps](samples/updateMapServiceUrlsInWebMaps.py)
+* [Update the URL for registered map services or web applications](samples/updateRegisteredUrlForServiceOrApp.py)
+* [Search for the top 10 most viewed public items in my organization or search for all content owned by a specific user (admin view)](samples/searchExamples.py)
 
 
 ## Requirements
