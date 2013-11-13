@@ -33,13 +33,18 @@ A Python package to assist with administering ArcGIS Online Organizations.
 
 * [Create a spreadsheet of all users in the org](samples/createUserListCSV.py)
 * [Add new users to existing groups](samples/addNewUsersToGroups.py)
-* [Move all items from one account to another, reassign ownership of all groups, add user to another user's groups, or do all three at the same time (i.e., migrate user's items and groups to a new account within the same Org)](samples/moveItemsReassignGroups.py)
+* Migrate items and group ownership/membership:
+  * [Move all items from one account to another, reassign ownership of all groups, and/or add user to another user's groups](samples/moveItemsReassignGroups.py)
+  * [Migrate account(s)](samples/migrateAccount.py)
   
 ### Utilities Classs
 
 * [Update map service urls in webmaps](samples/updateMapServiceUrlsInWebMaps.py)
 * [Update the URL for registered map services or web applications](samples/updateRegisteredUrlForServiceOrApp.py)
-* [Search for the top 10 most viewed public items in my organization or search for all content owned by a specific user (admin view)](samples/searchExamples.py)
+* Search Examples:
+  * [Search for the top 10 most viewed public items in my organization](samples/searchTopViewedItems.py)
+  * [Search for all content owned by a specific user (admin view)](samples/searchAllUserItems.py)
+  * [Advanced search examples](search-cheat-sheet.md)
 
 
 ## Requirements
