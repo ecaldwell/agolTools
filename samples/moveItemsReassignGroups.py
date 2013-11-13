@@ -1,7 +1,7 @@
 #### Move all items from one account to another, reassign ownership of all groups, or add user to another user's groups
 
 # Requires admin role
-# If you want to do all three tasks at once, see migrateAccount or migrateAccounts functions
+# If you want to do all three tasks at once, see migrateAccount or migrateAccounts functions (below)
 
 from agoTools.admin import Admin
 agoAdmin = Admin(<username>)  # Replace <username> with your admin username
