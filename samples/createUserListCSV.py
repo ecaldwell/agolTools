@@ -13,4 +13,10 @@ with open(outputFile, 'wb') as output:
     dataWriter.writerow(['Full Name', 'Email', 'Username', 'Role', 'Date Created'])
     # Write user data.
     for user in users:
-        dataWriter.writerow([user['fullName'], user['email'], user['username'], user['role'], time.strftime("%Y-%m-%d",time.gmtime(user['created']/1000))])
+        if user:
+        # examples of how to filter users in various ways...
+        # if user['disabled'] == True:
+        # if user['username'] == '<username>':
+        # if 'Mark' in user['fullName']:
+        # if '@agencyX.gov' in user['email']:
+            dataWriter.writerow([user['fullName'], user['email'], user['username'], user['role'], time.strftime("%Y-%m-%d",time.gmtime(user['created']/1000))])
