@@ -13,7 +13,7 @@ with open(outputFile, 'wb') as output:
     dataWriter.writerow(['Full Name', 'Email', 'Username', 'Role', 'Date Created'])
     # Write user data.
     for user in users:
-        if user:
+        if user:     #comment out this line if using one of the filters below
         # examples of how to filter users in various ways...
         # if user['disabled'] == True:
         # if user['username'] == '<username>':
