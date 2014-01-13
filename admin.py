@@ -22,35 +22,26 @@ class Admin:
         users = json.loads(response)
         return users
 
-    def getUsers(self):
-        ''' Returns a list of all users in the organization (requires admin access).'''
+    def getUsers(self, roles=None, daysToCheck=10000):
+        '''
+        Returns a list of all users in the organization (requires admin access).
+        Optionally provide a list of roles to filter the results (e.g. ['org_publisher']).
+        Optionally provide a number to include only accounts created in the last x number of days.
+        '''
+        if not roles:
+            roles = ['org_admin', 'org_publisher', 'org_user']
+            #roles = ['org_admin', 'org_publisher', 'org_author', 'org_viewer'] # new roles to support Dec 2013 update
         allUsers = []
         users = self.__users__()
         for user in users['users']:
-            allUsers.append(user)
+            if user['role'] in roles and date.fromtimestamp(float(user['created'])/1000) > date.today()-timedelta(days=daysToCheck):
+                allUsers.append(user)
         while users['nextStart'] > 0:
             users = self.__users__(users['nextStart'])
             for user in users['users']:
-                allUsers.append(user)
+                if user['role'] in roles and date.fromtimestamp(float(user['created'])/1000) > date.today()-timedelta(days=daysToCheck):
+                    allUsers.append(user)
         return allUsers
-
-    def getNewUsers(self, daysToCheck):
-            '''
-            REQUIRES ADMIN ACCESS
-            Add new organization users to multiple groups and return a list of the status.
-            '''
-            # daysToCheck is the time interval to check for new users.
-            # e.g. 1 will check past day, 7 will check past week, etc.
-
-            users = self.getUsers()
-
-            # Create a list of all new users (joined in the last 'daysToCheck' days).
-            newUsers = []
-            for user in users:
-                if date.fromtimestamp(float(user['created'])/1000) > date.today()-timedelta(days=daysToCheck):
-                    newUsers.append(user)
-
-            return newUsers
 
     def addUsersToGroups(self, users, groups):
             '''
@@ -70,7 +61,7 @@ class Admin:
                 # Add Users - REQUIRES POST method (undocumented operation as of 2013-11-12).
                 response = urllib.urlopen(self.user.portalUrl + '/sharing/rest/community/groups/' + group + '/addUsers?', 'users=' + ','.join(users) + "&" + parameters).read()
                 # Users not added will be reported back with each group.
-                toolSummary.append({groupID: json.loads(response)})
+                toolSummary.append({group: json.loads(response)})
 
             return toolSummary
 
