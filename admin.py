@@ -223,6 +223,6 @@ class Admin:
                 userTo = user[1]
 
                 print '=========='
-                migrateAccounts(userFrom, userTo)
+                migrateAccount(userFrom, userTo)
                 print '=========='
         return
