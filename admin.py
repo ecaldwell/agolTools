@@ -195,16 +195,16 @@ class Admin:
         Also adds userTo to all groups which userFrom is a member.
         '''
 
-        print 'Copying all items from ' + userFrom + ' to ' + userTo + '...'
-        self.reassignAllUser1ItemsToUser2(self, userFrom, userTo)
+        print 'Reassigning items from ' + userFrom + ' to ' + userTo + '...'
+        self.reassignAllUser1ItemsToUser2(userFrom, userTo)
         print
 
         print 'Reassigning groups owned by ' + userFrom + ' to ' + userTo + '...'
-        self.reassignAllGroupOwnership(self, userFrom, userTo)
+        self.reassignAllGroupOwnership(userFrom, userTo)
         print
 
         print 'Adding ' + userTo + ' as a member of ' + userFrom + "'s groups..."
-        self.addUser2ToAllUser1Groups(self, userFrom, userTo)
+        self.addUser2ToAllUser1Groups(userFrom, userTo)
         return
 
     def migrateAccounts(self, pathUserMappingCSV):
@@ -223,15 +223,6 @@ class Admin:
                 userTo = user[1]
 
                 print '=========='
-                print 'Copying all items from ' + userFrom + ' to ' + userTo + '...'
-                self.reassignAllUser1ItemsToUser2(self, userFrom, userTo)
-                print
-
-                print 'Reassigning groups owned by ' + userFrom + ' to ' + userTo + '...'
-                self.reassignAllGroupOwnership(self, userFrom, userTo)
-                print
-
-                print 'Adding ' + userTo + ' as a member of ' + userFrom + "'s groups..."
-                self.addUser2ToAllUser1Groups(self, userFrom, userTo)
+                migrateAccounts(userFrom, userTo)
                 print '=========='
         return
